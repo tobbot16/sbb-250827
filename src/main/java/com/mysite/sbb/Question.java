@@ -25,7 +25,7 @@ public class Question {
 
     private LocalDateTime createDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // mappedBy : Answer 클래스의 question 필드와 매핑됨, cascade : 질문이 삭제되면 관련된 답변도 삭제
     private List<Answer> answers;
 
 
