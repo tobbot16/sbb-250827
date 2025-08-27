@@ -1,7 +1,9 @@
 spring:
   application:
     name: sbb
-
+  profiles:
+    active: dev
 
 server:
   port: 8070
+
