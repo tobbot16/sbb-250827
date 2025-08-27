@@ -3,6 +3,26 @@ spring:
     name: sbb
   profiles:
     active: dev
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    root: info
+    org.spingframework.transaction.interceptor: trace
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.orm.jdbc.extractor: TRACE
 
 server:
   port: 8070
