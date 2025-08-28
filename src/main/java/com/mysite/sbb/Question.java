@@ -25,8 +25,15 @@ public class Question {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // mappedBy : Answer 클래스의 question 필드와 매핑됨, cascade : 질문이 삭제되면 관련된 답변도 삭제
+     @OneToMany(mappedBy = "question", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}) // mappedBy : Answer 클래스의 question 필드와 매핑됨, cascade : 질문이 삭제되면 관련된 답변도 삭제
     private List<Answer> answers;
 
 
+    public void addAnswer(String string) {
+        Answer answer = new Answer();
+        answer.setContent(string);
+        answer.setQuestion(this); // 현재 질문 객체를 설정
+        answers.add(answer); // 질문의 답변 목록에 추가
+
+    }
 }

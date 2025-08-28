@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -92,7 +93,7 @@ class QuestionRepositoryTest {
 	}
 
 	@Test
-	void t8(){
+	void t8(){  // repository 버전
 		Question question = this.questionRepository.findById(2).get();
 
 		Answer a = new Answer();
@@ -102,4 +103,21 @@ class QuestionRepositoryTest {
 		this.answerRepository.save(a);
 	}
 
+	@Test
+	@Transactional
+	void t9(){ // one - many 버전
+		Question question = this.questionRepository.findById(2).get();
+
+		int before = question.getAnswers().size();
+		question.addAnswer("네 자동으로 생성됩니다.");
+
+		int after = question.getAnswers().size();
+		assertEquals(before+1, after);
+	}
+
+
+
+
 }
+
+
