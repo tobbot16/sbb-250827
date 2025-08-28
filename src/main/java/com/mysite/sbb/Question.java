@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,8 +26,8 @@ public class Question {
 
     private LocalDateTime createDate;
 
-     @OneToMany(mappedBy = "question", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}) // mappedBy : Answer 클래스의 question 필드와 매핑됨, cascade : 질문이 삭제되면 관련된 답변도 삭제
-    private List<Answer> answers;
+     @OneToMany(mappedBy = "question",fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.PERSIST}) // mappedBy : Answer 클래스의 question 필드와 매핑됨, cascade : 질문이 삭제되면 관련된 답변도 삭제
+    private List<Answer> answers = new ArrayList<>();
 
 
     public void addAnswer(String string) {

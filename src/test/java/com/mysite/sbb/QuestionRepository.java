@@ -116,6 +116,13 @@ class QuestionRepositoryTest {
 	}
 
 
+	@Test
+	void t10(){
+		Question q2 = questionRepository.findById(2).get();
+		Answer answer = q2.getAnswers().get(0);
+
+		System.out.println("answer = " + answer.getContent());
+	}
 
 
 }
